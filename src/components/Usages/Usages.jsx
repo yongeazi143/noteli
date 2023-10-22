@@ -1,6 +1,9 @@
+import { useRef } from "react";
+import CardAnimation from "../../hoc/Animation/CardsAnimation/CardsAnimation";
 import Card from "./SingleCard/Card";
 
 const Usages = () => {
+  const cardsRef = useRef();
   return (
     <section className="bg-footer py-5">
       <header className="font-poppins text-center">
@@ -17,12 +20,9 @@ const Usages = () => {
           versatile tool for a wide range of users.
         </p>
       </header>
-      <div
-        className="m-auto max-w-[800px] flex flex-col items-center justify-center
-      md:flex-row flex-wrap"
-      >
+      <CardAnimation forwardRef={cardsRef}>
         <Card />
-      </div>
+      </CardAnimation>
     </section>
   );
 };

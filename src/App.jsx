@@ -1,23 +1,29 @@
+import { useState, useEffect } from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import Content from "./hoc/Contents/Contents";
-import Login from "./routes/auth/Login/Login";
-import Signup from "./routes/auth/Signup/Signup";
-import UserProfile from "./routes/auth/Profile/Profile";
+import PageLoader from "./UI/PageLoader/PageLoader";
+import PageRoutes from "./routes/PageRoutes";
 
 const App = () => {
-  return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Content />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/create-account" element={<Signup />} />
-        <Route path="/users-@james" element={<UserProfile />} />
-      </Routes>
-    </>
-  );
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const handleLoad = () => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 10000);
+    };
+
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+    }
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
+
+  return <>{loading ? <PageLoader /> : <PageRoutes />}</>;
 };
 
 export default App;

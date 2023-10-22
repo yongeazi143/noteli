@@ -4,9 +4,21 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body,
 #root {
   display: contents;
+}
+
+.active {
+  color: #f48c06;
+  border-bottom: 1px solid #2f327d;
+  border-bottom-width: 4px;
 }
 
 /* Control Visibility */
@@ -57,3 +69,35 @@ body,
     margin-right: 2.5rem;
   }
 }
+
+#icon {
+  stroke: #2f327d;
+  fill-opacity: 0;
+  stroke-width: 1px;
+  stroke-dasharray: 4500;
+  animation: draw 8s ease infinite;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 4500;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.search {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 100%;
+  border-image: linear-gradient(90deg, #a9a5fd 0%, #ebd75d 101.62%);
+  border-image-slice: 1;
+}
+
+/* Home */
+/* #Home {
+  background: url("./assets/smiling-woman.png") no-repeat;
+  height: 90vh;
+  background-attachment: fixed;
+} */

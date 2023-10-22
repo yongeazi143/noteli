@@ -7,8 +7,12 @@ dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  define: {
-    "process.env": {},
-  },
   plugins: [react()],
+  server: {
+    hmr: true,
+    host: true,
+  },
+  define: {
+    "process.env": process.env,
+  },
 });

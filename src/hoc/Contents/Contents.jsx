@@ -6,10 +6,12 @@ import Hero from "../../components/Hero/Hero";
 import Usages from "../../components/Usages/Usages";
 import Testimonials from "../../components/Testimonials/Testimonials";
 import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Content() {
   return (
     <>
+      <Navbar />
       <Hero />
       <Features />
       <Companies />

@@ -3,8 +3,8 @@ import appFeatures from "../../constants/features";
 
 const Features = () => {
   return (
-    <section className="mt-24 flex flex-col items-center">
-      <div className="mx-auto text-center">
+    <section className="mt-28 flex flex-col items-center" id="features">
+      <div className="mx-auto text-center mt-5">
         <h1 className="text-xl font-serif font-medium leading-normal text-blue mb-5 md:text-2xl lg:text-4xl lg:leading-relaxed">
           Core features and <span className="text-orange">functionality</span>
         </h1>

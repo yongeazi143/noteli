@@ -9,6 +9,7 @@ import Box2 from "../assets/box2.png";
 import Box3 from "../assets/box3.png";
 import VisionGirl from "../assets/vision-girl.png";
 import SmilingWoman from "../assets/smiling-woman.png";
+import HomeImg1 from "../assets/home-bg-1.jpg";
 
 const images = {
   HeroWoman,
@@ -22,6 +23,7 @@ const images = {
   Box3,
   VisionGirl,
   SmilingWoman,
+  HomeImg1,
 };
 
 export default images;

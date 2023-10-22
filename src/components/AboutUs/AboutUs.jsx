@@ -2,8 +2,8 @@ import TheTeams from "../../UI/SVG/TheTeams";
 import images from "../../constants/images";
 
 const AboutUs = () => (
-  <section className="">
-    <header className="mt-4 font-poppins text-center">
+  <section id="about-us">
+    <header className="mt-10 font-poppins text-center">
       <h1 className="font-semibold text-2xl text-dark-blue">
         About <span className="text-orange">Us</span>
       </h1>
