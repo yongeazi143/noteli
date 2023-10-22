@@ -43,7 +43,7 @@ const UserDashboard = () => {
               autoComplete="off"
               placeholder="Search note..."
             />
-            <span className="absolute left-1 top-2">
+            <span className="md:absolute left-1 top-2">
               <i className="bx bx-search bx-sm text-nav-blue"></i>
             </span>
           </li>
