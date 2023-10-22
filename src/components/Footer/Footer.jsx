@@ -1,13 +1,16 @@
-import Polygon from "../../UI/SVG/polygon";
+// import Polygon from "../../UI/SVG/Icon";
+
+import Logo from "../../UI/Logo/Logo";
 
 const Footer = () => (
   <footer className="w-full p-4 flex flex-col h-96 bg-footer text-gray-100 items-center justify-start">
     <div className="w-full flex flex-col md:flex-row items-center justify-center md:gap-16 ">
       <div className="relative">
-        <Polygon />
-        <h1 className="absolute -right-12 bottom-6 font-unica font-bold text-3xl text-orange">
+        {/* <Polygon /> */}
+        <Logo />
+        {/* <h1 className="absolute -right-12 bottom-6 font-unica font-bold text-3xl text-orange">
           Note.li
-        </h1>
+        </h1> */}
       </div>
       <div className="w-[1px] h-5 md:h-10 bg-gray-dark md:hidden" />
       <p className="font-serif font-bold text-sm text-gray-100 md:w-40 ">
