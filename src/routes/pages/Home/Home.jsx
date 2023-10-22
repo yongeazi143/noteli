@@ -42,7 +42,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="rounded-md w-full shadow shadow-gray h-52 bg-white flex items-center justify-center cursor-pointer hover:bg-opacity-90">
+          <div className="rounded-md w-full shadow shadow-gray h-52 bg-white flex items-center justify-center cursor-pointer">
             <div className="flex flex-col items-center justify-center gap-3 ">
               <i className="bx bx-plus-circle bx-md"></i>
               <h1 className="text-2xl font-medium  font-serif">

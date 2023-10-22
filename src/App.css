@@ -96,8 +96,8 @@ body,
 }
 
 /* Home */
-/* #Home {
-  background: url("./assets/smiling-woman.png") no-repeat;
+#Home {
+  /* background-image: url() no-repeat; */
   height: 90vh;
   background-attachment: fixed;
-} */
+}
