@@ -34,7 +34,7 @@ const UserDashboard = () => {
           <i className="bx bx-menu bx-sm text-nav-blue"></i>
         </button>
         <ul className="flex items-center justify-evenly  gap-2">
-          <li className="search relative ">
+          <li className="md:search relative ">
             {/* Search Container */}
             <input
               type="text"
