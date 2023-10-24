@@ -25,7 +25,7 @@ const PageRoutes = () => {
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 8000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [activeItem]);
