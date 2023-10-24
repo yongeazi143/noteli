@@ -8,8 +8,8 @@ const Sidebar = ({ children, show }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <aside
-      className={`h-[90vh] transition-transform absolute z-10 ${
-        show ? null : "-translate-x-20 w-0"
+      className={`h-screen transition-transform fixed z-10 ${
+        show ? null : "-translate-x-36 w-0"
       }`}
     >
       <nav

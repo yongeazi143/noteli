@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Content from "../hoc/Contents/Contents";
 import Login from "./auth/Login/Login";
 import UserDashboard from "./auth/UserDashboard/UserDashboard";
+import PenAnimation from "../hoc/Animation/PenAnimation/PenAnimation";
 import { useGlobalContext } from "../../context";
 
 // Imports
@@ -17,8 +18,18 @@ const Settings = lazy(() => import("./pages/Settings/Settings"));
 
 const PageRoutes = () => {
   const { activeItem } = useGlobalContext();
-
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 8000);
+
+    return () => clearTimeout(timer);
+  }, [activeItem]);
+
   const renderSubRoute = () => {
     switch (activeItem) {
       case "Home":
@@ -40,24 +51,16 @@ const PageRoutes = () => {
     }
   };
 
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(delay);
-  }, [activeItem]);
   return (
     <Routes>
       <Route path="/" element={<Content />} />
       <Route path="/login" exact element={<Login />} />
-      {/* <Route path="/create-account" element={<Signup />} /> */}
       <Route path="/user/dashboard" element={<UserDashboard />}>
         <Route
           path={`/user/dashboard/:${activeItem.toLowerCase()}`}
           element={
-            <Suspense fallback={<div>Loading...</div>}>
-              {renderSubRoute()}
+            <Suspense fallback={null}>
+              {loading ? <PenAnimation /> : renderSubRoute()}
             </Suspense>
           }
         />
@@ -65,4 +68,5 @@ const PageRoutes = () => {
     </Routes>
   );
 };
+
 export default PageRoutes;

@@ -4,7 +4,7 @@ import TimeOfDay from "../../../containers/TimeOfDay/TimeofDay";
 
 const Home = () => {
   return (
-    <section className="relative w-full">
+    <section className="relative w-full  ">
       <div
         className="flex items-start justify-between p-2 text-white"
         style={{
@@ -38,15 +38,6 @@ const Home = () => {
               <i className="bx bx-plus-circle bx-md"></i>
               <h1 className="text-2xl font-medium  font-serif">
                 Create Public Note
-              </h1>
-            </div>
-          </div>
-
-          <div className="rounded-md w-full shadow shadow-gray h-52 bg-white flex items-center justify-center cursor-pointer">
-            <div className="flex flex-col items-center justify-center gap-3 ">
-              <i className="bx bx-plus-circle bx-md"></i>
-              <h1 className="text-2xl font-medium  font-serif">
-                Create Blank Note
               </h1>
             </div>
           </div>
