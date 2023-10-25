@@ -11,12 +11,10 @@ const UserEmail = ({ onFirstLetterChange }) => {
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
-        const { id, email } = await hanko.user.getCurrent();
+        const { email } = await hanko.user.getCurrent();
 
         // Set user email in the state
         setUserEmail(email);
-        // Save User Id To Local Storage
-        localStorage.setItem("userId", id);
 
         // Notify parent component about the first letter
         if (onFirstLetterChange && typeof onFirstLetterChange === "function") {

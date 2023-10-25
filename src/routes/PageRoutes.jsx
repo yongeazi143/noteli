@@ -59,9 +59,7 @@ const PageRoutes = () => {
         <Route
           path={`/user/dashboard/:${activeItem.toLowerCase()}`}
           element={
-            <Suspense fallback={null}>
-              {loading ? <PenAnimation /> : renderSubRoute()}
-            </Suspense>
+            <Suspense fallback={<PenAnimation />}>{renderSubRoute()}</Suspense>
           }
         />
       </Route>
