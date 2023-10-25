@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Hanko } from "@teamhanko/hanko-elements";
-import useDebounce from "../../containers/Debounce/Debounce";
+import useDebounce from "../../containers/debounce/debounce";
 import storage from "../../containers/storage/storage";
 import { AES, enc } from "crypto-js";
 const apiUrl = process.env.HANKO_API_URL;
