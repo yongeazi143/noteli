@@ -1,12 +1,13 @@
 {
   "rewrites": [
     {
-      "source": "/api/generate",
-      "destination": "/api/generate"
-    },
-    {
       "source": "/(.*)",
       "destination": "/"
     }
-  ]
+  ],
+  "functions": {
+    "api/genetate/**/*.ts": {
+      "maxDuration": 30
+    }
+  }
 }
