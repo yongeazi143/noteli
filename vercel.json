@@ -1,15 +1,12 @@
 {
   "rewrites": [
     {
+      "source": "/api/generate",
+      "destination": "/api/generate"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/generate",
-      "methods": ["POST"],
-      "dest": "/api/generate"
     }
   ]
 }
