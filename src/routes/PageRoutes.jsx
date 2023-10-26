@@ -5,7 +5,6 @@ import Login from "./auth/Login/Login";
 import UserDashboard from "./auth/UserDashboard/UserDashboard";
 import PenAnimation from "../hoc/Animation/PenAnimation/PenAnimation";
 import { useGlobalContext } from "../../context";
-
 // Imports
 
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -15,20 +14,10 @@ const Favourites = lazy(() => import("./pages/Favourites/Favourites"));
 const SharedWithMe = lazy(() => import("./pages/Shared/Shared"));
 const Profile = lazy(() => import("./pages/ProfileDetails/ProfileDetails"));
 const Settings = lazy(() => import("./pages/Settings/Settings"));
+const NewNotes = lazy(() => import("../Notes/NewNotes/NewNotes"));
 
 const PageRoutes = () => {
   const { activeItem } = useGlobalContext();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-
-    return () => clearTimeout(timer);
-  }, [activeItem]);
 
   const renderSubRoute = () => {
     switch (activeItem) {
@@ -46,6 +35,8 @@ const PageRoutes = () => {
         return <Profile />;
       case "Settings":
         return <Settings />;
+      case "New-notes":
+        return <NewNotes />;
       default:
         return null;
     }
@@ -60,6 +51,12 @@ const PageRoutes = () => {
           path={`/user/dashboard/:${activeItem.toLowerCase()}`}
           element={
             <Suspense fallback={<PenAnimation />}>{renderSubRoute()}</Suspense>
+          }
+        />
+        <Route
+          path={"/user/dashboard/:new-note"}
+          element={
+            <Suspense fallback={<PenAnimation />}>{<NewNotes />}</Suspense>
           }
         />
       </Route>

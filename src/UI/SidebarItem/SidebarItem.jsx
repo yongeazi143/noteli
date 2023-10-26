@@ -4,11 +4,7 @@ import { SidebarContext } from "../Sidebar/Sidebar";
 
 const SidebarItem = ({ icon, value, status, alert, onClick }) => {
   const { expanded } = useContext(SidebarContext);
-  const { active, setActive } = useGlobalContext();
 
-  const handleActiveLink = () => {
-    setActive(!active);
-  };
   return (
     <li
       className={`

@@ -1,11 +1,19 @@
 import { createContext, useState } from "react";
 import Logo from "../Logo/Logo";
 import LogoutUser from "../../routes/auth/Logout/Logout";
+import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../../context";
 
 export const SidebarContext = createContext();
 
 const Sidebar = ({ children, show }) => {
   const [expanded, setExpanded] = useState(false);
+  const { setActiveItem } = useGlobalContext();
+  const navigate = useNavigate();
+  const handleNotesCreation = () => {
+    setActiveItem("New-notes");
+    navigate("/user/dashboard/:new-note");
+  };
   return (
     <aside
       className={`h-screen transition-transform fixed z-10 ${
@@ -48,6 +56,7 @@ const Sidebar = ({ children, show }) => {
               className={`h-9 bg-orange rounded text-white font-poppins font-medium cursor-pointer overflow-hidden transition-all hover:bg-opacity-90 text-center ${
                 expanded ? "w-full" : "w-max py-2 px-3"
               }`}
+              onClick={handleNotesCreation}
             >
               {expanded ? (
                 "New Note"
