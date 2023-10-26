@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Hanko } from "@teamhanko/hanko-elements";
 
 const AppContext = React.createContext();
 
@@ -6,6 +7,12 @@ export const ContextApp = ({ children }) => {
   const [activeColor, setActiveColor] = useState();
   const [activeItem, setActiveItem] = useState("Home");
   const [currentUrl, setCurrentUrl] = useState("/user/dashboard/:home");
+  const [noteJsonData, setNoteJsonData] = useState({});
+  const apiUrl = process.env.HANKO_API_URL;
+  const hanko = new Hanko(apiUrl);
+
+  const session = hanko.session.get();
+  const userId = () => session && session.userID;
 
   return (
     <AppContext.Provider
@@ -16,6 +23,9 @@ export const ContextApp = ({ children }) => {
         setCurrentUrl,
         activeColor,
         setActiveColor,
+        userId,
+        noteJsonData,
+        setNoteJsonData,
       }}
     >
       {children}

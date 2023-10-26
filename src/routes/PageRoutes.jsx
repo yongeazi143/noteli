@@ -5,6 +5,7 @@ import Login from "./auth/Login/Login";
 import UserDashboard from "./auth/UserDashboard/UserDashboard";
 import PenAnimation from "../hoc/Animation/PenAnimation/PenAnimation";
 import { useGlobalContext } from "../../context";
+import Signup from "./auth/Signup/Signup";
 // Imports
 
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -46,6 +47,7 @@ const PageRoutes = () => {
     <Routes>
       <Route path="/" element={<Content />} />
       <Route path="/login" exact element={<Login />} />
+      <Route path="/Signup" exact element={<Signup />} />
       <Route path="/user/dashboard" element={<UserDashboard />}>
         <Route
           path={`/user/dashboard/:${activeItem.toLowerCase()}`}

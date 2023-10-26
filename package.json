@@ -14,6 +14,7 @@
     "@teamhanko/hanko-elements": "^0.8.3",
     "@upstash/ratelimit": "^0.4.4",
     "@vercel/kv": "^0.2.3",
+    "@vercel/node": "^3.0.7",
     "ai": "^2.2.19",
     "axios": "^1.5.1",
     "crypto-js": "^4.2.0",

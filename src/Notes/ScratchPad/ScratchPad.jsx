@@ -1,26 +1,13 @@
 import { useState, useEffect } from "react";
-import { Hanko } from "@teamhanko/hanko-elements";
 import useDebounce from "../../containers/debounce/debounce";
 import storage from "../../containers/storage/storage";
-import { AES, enc } from "crypto-js";
-const apiUrl = process.env.HANKO_API_URL;
-const hanko = new Hanko(apiUrl);
-const encryptionKey = "your-encryption-key";
-
-const encryptText = (text) => {
-  return AES.encrypt(text, encryptionKey).toString();
-};
-
-const decryptText = (encryptedText) => {
-  const bytes = AES.decrypt(encryptedText, encryptionKey);
-  return bytes.toString(enc.Utf8);
-};
+import { useGlobalContext } from "../../../context";
+import { decryptText, encryptText } from "../../containers/secure/secure";
 
 const ScratchPad = () => {
-  const session = hanko.session.get();
-  const userId = () => session && session.userID;
+  const { userId } = useGlobalContext();
   const [scratchNote, setScratchNote] = useState(() => {
-    const storedText = storage.get(userId());
+    const storedText = storage.get(`scratch__${userId()}`);
     if (storedText) {
       return decryptText(storedText);
     }
@@ -40,7 +27,7 @@ const ScratchPad = () => {
   };
 
   useEffect(() => {
-    storage.set(userId(), encryptText(debouncedTxt));
+    storage.set(`scratch__${userId()}`, encryptText(debouncedTxt));
   }, [debouncedTxt]);
 
   return (
