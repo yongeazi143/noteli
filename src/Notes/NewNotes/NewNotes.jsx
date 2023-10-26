@@ -12,7 +12,7 @@ const NewNotes = () => {
           Share
         </button>
       </div>
-      <Editor defaultContext="" />
+      <Editor defaultValue="" />
       <div className="w-full flex flex-col items-center justify-between mb-5 gap-5">
         <Colors />
         <button className="bg-blue text-center text-xl font-poppins font-medium text-white  px-7 py-3 rounded cursor-pointer self-end mr-5">
