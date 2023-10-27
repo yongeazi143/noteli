@@ -1,8 +1,8 @@
-const { VercelRequest, VercelResponse } = require("@vercel/node");
-const { kv } = require("@vercel/kv");
-const { StreamingTextResponse } = require("ai");
-const OpenAI = require("openai");
-const { Ratelimit } = require("@upstash/ratelimit");
+import { VercelRequest, VercelResponse } from "@vercel/node";
+import { kv } from "@vercel/kv";
+import { StreamingTextResponse } from "ai";
+import OpenAI from "openai";
+import { Ratelimit } from "@upstash/ratelimit";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
@@ -13,12 +13,10 @@ export const runtime = "edge";
 
 async function handler(req, res) {
   if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === "") {
-    res
-      .status(400)
-      .json({
-        error:
-          "Missing OPENAI_API_KEY – make sure to add it to your environment variables.",
-      });
+    res.status(400).json({
+      error:
+        "Missing OPENAI_API_KEY – make sure to add it to your environment variables.",
+    });
     return;
   }
 
