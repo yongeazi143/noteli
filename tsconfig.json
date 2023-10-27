@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Choose your target version (e.g., ES6, ESNext)
+    "module": "CommonJS", // Specify the module system (CommonJS for Node.js)
+    "outDir": "./dist", // Output directory for transpiled JavaScript
+    "rootDir": "./src", // Source code directory
+    "strict": true, // Enable strict TypeScript checks
+    "esModuleInterop": true // Allow interop with CommonJS modules
+    // Other compiler options...
+  },
+  "include": [
+    "./src/**/*" // Specify the source code directory to include
+  ],
+  "exclude": [
+    "node_modules" // Exclude specific directories
+  ]
+}
