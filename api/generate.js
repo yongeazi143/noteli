@@ -3,17 +3,23 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-const runtime = "edge";
+export const runtime = "edge";
 
-async function generateText(prompt) {
+async function start() {
   try {
+    let { prompt } = await req.json();
+
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
           content:
-            "You are an AI writing assistant that continues existing text based on context from prior text. Give more weight/priority to the later characters than the beginning ones. Limit your response to no more than 200 characters, but make sure to construct complete sentences.",
+            "You are an AI writing assistant that continues existing text based on context from prior text. " +
+            "Give more weight/priority to the later characters than the beginning ones. " +
+            "Limit your response to no more than 200 characters, but make sure to construct complete sentences.",
+          // we're disabling markdown for now until we can figure out a way to stream markdown text with proper formatting: https://github.com/steven-tey/novel/discussions/7
+          // "Use Markdown formatting when appropriate.",
         },
         {
           role: "user",
@@ -36,19 +42,8 @@ async function generateText(prompt) {
 
     return new StreamingTextResponse(stream);
   } catch (err) {
-    console.error("Sorry, an error occurred", err);
-    return "An error occurred";
+    console.log("Sorry, an error occurred");
   }
 }
 
-function handler(event) {
-  const prompt = "Your user input here"; // Replace with actual user input
-  return generateText(prompt).then((streamingResponse) => {
-    return streamingResponse;
-  });
-}
-
-module.exports = {
-  handler,
-  runtime,
-};
+start();
