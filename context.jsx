@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Hanko } from "@teamhanko/hanko-elements";
 
 const AppContext = React.createContext();
@@ -14,6 +14,11 @@ export const ContextApp = ({ children }) => {
   const session = hanko.session.get();
   const userId = () => session && session.userID;
 
+  const getNoteDataFromLocalStorage = () => {
+    return JSON.parse(localStorage.getItem(`note__${userId()}`)) || {};
+  };
+
+
   return (
     <AppContext.Provider
       value={{
@@ -26,6 +31,7 @@ export const ContextApp = ({ children }) => {
         userId,
         noteJsonData,
         setNoteJsonData,
+        getNoteDataFromLocalStorage,
       }}
     >
       {children}

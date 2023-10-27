@@ -3,11 +3,10 @@ import swal from "sweetalert";
 import { useGlobalContext } from "../../../context";
 
 const Button = () => {
-  const { userId, noteJsonData, setNoteJsonData } = useGlobalContext();
+  const { getNoteDataFromLocalStorage, noteJsonData, setNoteJsonData } =
+    useGlobalContext();
 
   const onSave = () => {
-    const JSON_DATA = localStorage.getItem(`note__${userId()}`);
-    setNoteJsonData(JSON_DATA);
     console.log(noteJsonData);
   };
 
