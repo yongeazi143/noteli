@@ -36,7 +36,7 @@ const UserDashboard = () => {
         clicked={() => setToggleSidebar(!toggleSidebar)}
       />
       <section className="flex flex-col ">
-        <nav className="h-[73px] w-full fixed  px-5 flex items-center justify-between border-b border-gray-dark shadow bg-white top-0 z-20">
+        <nav className="h-[73px] w-full fixed  px-5 flex items-center justify-between border-b border-gray-dark shadow bg-white top-0 z-50">
           <button onClick={() => setToggleSidebar(!toggleSidebar)}>
             <i className="bx bx-menu bx-sm text-nav-blue"></i>
           </button>
