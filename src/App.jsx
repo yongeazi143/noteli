@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Toaster, ToastBar } from "react-hot-toast";
+
 import "./App.css";
 import PageLoader from "./UI/PageLoader/PageLoader";
 import PageRoutes from "./routes/PageRoutes";
@@ -23,7 +25,32 @@ const App = () => {
     };
   }, []);
 
-  return <>{loading ? <PageLoader /> : <PageRoutes />}</>;
+  return (
+    <>
+      <Toaster
+        toastOptions={{
+          duration: 3000,
+          style: {
+            top: "80px",
+            position: "relative",
+          },
+        }}
+      >
+        {(t) => (
+          <ToastBar
+            toast={t}
+            style={{
+              ...t.style,
+              animation: t.visible
+                ? "custom-enter 1s ease"
+                : "custom-exit 1s ease",
+            }}
+          />
+        )}
+      </Toaster>
+      {loading ? <PageLoader /> : <PageRoutes />}
+    </>
+  );
 };
 
 export default App;

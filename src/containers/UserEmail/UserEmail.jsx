@@ -1,6 +1,7 @@
 // UserEmail.jsx
 import React, { useEffect, useState } from "react";
 import { Hanko } from "@teamhanko/hanko-elements";
+import toast from "react-hot-toast";
 
 const apiUrl = process.env.HANKO_API_URL;
 
@@ -22,7 +23,11 @@ const UserEmail = ({ onFirstLetterChange }) => {
           onFirstLetterChange(firstLetter);
         }
       } catch (error) {
-        console.log("Error fetching user email:", error);
+        setTimeout(() => {
+          toast.error(
+            "Sorry there was an error fetching your Email. login again"
+          );
+        }, 2000);
       }
     };
     if (sessionStatus) {

@@ -1,21 +1,14 @@
 import { useState } from "react";
-import swal from "sweetalert";
 import { useGlobalContext } from "../../../context";
 
-const Button = () => {
-  const { getNoteDataFromLocalStorage, noteJsonData, setNoteJsonData } =
-    useGlobalContext();
-
-  const onSave = () => {
-    console.log(noteJsonData);
-  };
-
+const Button = ({ value, bgColor, onClick }) => {
   return (
     <button
-      className="bg-blue text-center text-sm font-poppins font-medium text-white  px-7 py-3 rounded cursor-pointer self-end mr-5 hover:opacity-90"
-      onClick={onSave}
+      className={`${bgColor} text-center text-sm font-poppins font-semibold text-white inline-block  transition duration-200 ease-in-out  px-4 py-3 rounded-md cursor-pointer self-end hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray focus-visible:ring-offset-2 active:scale-95 
+      ${value == "Save" ? "self-end mr-5" : null}`}
+      onClick={() => onClick()}
     >
-      save
+      {value}
     </button>
   );
 };

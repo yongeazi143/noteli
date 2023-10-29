@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Hanko } from "@teamhanko/hanko-elements";
 import UserEmail from "../../../containers/UserEmail/UserEmail";
+import swal from "sweetalert";
 
 const hankoApi = process.env.HANKO_API_URL;
 
@@ -35,11 +36,29 @@ const LogoutUser = ({ expanded }) => {
       console.error("Error during logout:", error);
     }
   };
+  const beforeLogout = () => {
+    swal({
+      title: "Are you sure?",
+      // text: "Make sure you save all notes,",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willLogout) => {
+      if (willLogout) {
+        console.log(willLogout);
+        swal("😊! Logging you out", {
+          icon: "success",
+        }).then(() => {
+          logout();
+        });
+      }
+    });
+  };
 
   return (
     <div
       className="border-t flex gap-1 p-3 absolute bottom-0 w-full group font-poppins border-gray-dark cursor-pointer"
-      onClick={logout}
+      onClick={beforeLogout}
     >
       <h1 className="py-2 px-4 bg-footer text-white text-xl rounded-md uppercase font-bold text-center">
         {firstLetter}

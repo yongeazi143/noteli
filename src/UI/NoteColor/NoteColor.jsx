@@ -1,4 +1,3 @@
-import { useGlobalContext } from "../../../context";
 const NoteColor = ({ onClick, selected, bgColor }) => {
   return (
     <button
