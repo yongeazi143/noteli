@@ -11,14 +11,8 @@ const NewNotes = () => {
   const [saveStatus, setSaveStatus] = useState("Saved");
   const [isEmpty, setIsEmpty] = useState(localStorage.getItem("editor_state"));
   const [isFlag, setIsFlag] = useState(isEmpty === "true");
-  const {
-    notes,
-    dispatch,
-    userId,
-    noteJsonData,
-    setNoteJsonData,
-    activeColor,
-  } = useGlobalContext();
+  const { dispatch, userId, noteJsonData, setNoteJsonData, activeColor } =
+    useGlobalContext();
 
   useEffect(() => {
     setIsFlag(isEmpty);
@@ -32,13 +26,9 @@ const NewNotes = () => {
   };
 
   const updateNoteData = (editor) => {
-    const json = editor.getJSONs();
+    const json = editor.getJSON();
     setNoteJsonData(json);
   };
-
-  useEffect(() => {
-    console.log(notes);
-  }, [notes]);
 
   const onSave = () => {
     if (isFlag === true) {
@@ -57,7 +47,7 @@ const NewNotes = () => {
         id: uuid(),
         color: activeColor,
         note: noteJsonData,
-        time: new Date(),
+        date: new Date().toLocaleDateString(),
       });
     }
   };
@@ -76,7 +66,7 @@ const NewNotes = () => {
         <Editor
           defaultValue=""
           onUpdate={() => {
-            setSaveStatus("Unsaved");
+            setSaveStatus("Writing...");
           }}
           onDebouncedUpdate={(editor) => {
             showSaveHandler();

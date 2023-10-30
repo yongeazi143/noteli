@@ -47,15 +47,13 @@ export const useGlobalContext = () => {
 const noteReducer = (notes, action) => {
   switch (action.type) {
     case "ADD_NOTE": {
-      return {
-        ...notes,
-        [action.id]: {
-          id: action.id,
-          noteColor: action.color,
-          content: action.note,
-          createdAt: action.time,
-        },
+      const newNote = {
+        id: action.id,
+        color: action.color,
+        contents: action.note,
+        createdAt: action.date,
       };
+      return [...notes, newNote];
     }
     case "EDIT_NOTE": {
       return notes.map((note) => {
@@ -81,9 +79,4 @@ const noteReducer = (notes, action) => {
   }
 };
 
-const initialNotes = {
-  id: uuid(),
-  noteColor: "#8ac3a3",
-  content: `<p>Hello World</p>`,
-  createdAt: new Date(),
-};
+const initialNotes = [];

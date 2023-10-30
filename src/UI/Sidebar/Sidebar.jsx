@@ -16,7 +16,7 @@ const Sidebar = ({ children, show }) => {
   };
   return (
     <aside
-      className={`h-screen transition-transform fixed z-10 ${
+      className={`h-screen transition-transform fixed z-30 ${
         show ? null : "-translate-x-36 w-0"
       }`}
     >

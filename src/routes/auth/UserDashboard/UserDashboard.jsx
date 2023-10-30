@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Outlet, useLocation, redirect } from "react-router-dom";
 import { Hanko } from "@teamhanko/hanko-elements";
+import toast from "react-hot-toast";
 import SidebarList from "../../../hoc/SidebarList/SidebarList";
 import { useGlobalContext } from "../../../../context";
 import Backdrop from "../../../UI/Backdrop/Backdrop";
@@ -22,7 +23,8 @@ const UserDashboard = () => {
       setCurrentUrl(pathname);
     };
     if (!sessionStatus) {
-      handleReload();
+      toast.error("Session Expired");
+      setTimeout(() => handleReload(), 1000);
     }
 
     hanko.onUserLoggedOut(() => {
@@ -36,7 +38,7 @@ const UserDashboard = () => {
         clicked={() => setToggleSidebar(!toggleSidebar)}
       />
       <section className="flex flex-col ">
-        <nav className="h-[73px] w-full fixed  px-5 flex items-center justify-between border-b border-gray-dark shadow bg-white top-0 z-50">
+        <nav className="h-[73px] w-full fixed  px-5 flex items-center justify-between border-b border-gray-dark shadow bg-white top-0 z-20">
           <button onClick={() => setToggleSidebar(!toggleSidebar)}>
             <i className="bx bx-menu bx-sm text-nav-blue"></i>
           </button>

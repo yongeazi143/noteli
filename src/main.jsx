@@ -5,11 +5,9 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ContextApp>
-        <App />
-      </ContextApp>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <ContextApp>
+      <App />
+    </ContextApp>
+  </BrowserRouter>
 );

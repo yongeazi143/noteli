@@ -1,5 +1,8 @@
 import { useState } from "react";
-const MyNotes = ({ tittle, content, color }) => {
+import List from "../Content/List/List";
+import Paragraph from "../Content/Paragraph/Paragraph";
+
+const MyNotes = ({ id, tittle, content, color, createdAt }) => {
   const [noteAction, setNoteAction] = useState(false);
   const [isHovered, setHovered] = useState(false);
 
@@ -23,13 +26,9 @@ const MyNotes = ({ tittle, content, color }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Fist Flex List Item */}
       <div className="flex items-center justify-between w-full relative">
-        <span
-          className="text-lg font-unica text-nav-blue font-bold
-                group-hover:text-white"
-        >
-          {new Date().toLocaleDateString()}
+        <span className="text-lg font-unica text-nav-blue font-bold group-hover:text-white">
+          {createdAt}
         </span>
         <span>
           <i
@@ -37,53 +36,20 @@ const MyNotes = ({ tittle, content, color }) => {
             onClick={() => setNoteAction(!noteAction)}
             style={{ borderColor: isHovered ? "#fff" : color }}
           ></i>
-          <ul
-            className={`${
-              noteAction ? "flex" : "hidden"
-            } absolute w-32 h-32 p4  shadow-sm shadow-gray rounded-md bg-white right-12 top-0 flex-col items-center justify-evenly gap-2 text-black`}
-          >
-            <li
-              className="w-full flex items-center justify-center gap-3 
-            cursor-pointer py-1  hover:bg-[#F7F8F9]"
-            >
-              <i className="bx bx-book-open"></i>
-              <span>View</span>
-            </li>
-            <li
-              className="w-full flex items-center justify-center gap-3 
-            cursor-pointer py-1  hover:bg-[#F7F8F9]"
-            >
-              <i className="bx bx-edit-alt"></i>
-              <span>Edit</span>
-            </li>
-            <li
-              className="w-full flex items-center justify-center gap-3 
-            cursor-pointer py-1  hover:bg-[#F7F8F9]"
-            >
-              <i className="bx bx-trash"></i>
-              <span>Delete</span>
-            </li>
-          </ul>
         </span>
       </div>
-      {/* 2nd Flex List Item */}
-      {/* 
-      tittle
-      content
-      color
-      */}
       <div className="w-full my-5">
         <h1 className="font-poppins font-medium text-2xl text-nav-blue mb-3 group-hover:text-white">
           {tittle}
         </h1>
-        <p className="text-base font-serif text-gray font-medium pr-4 group-hover:text-white">
-          {/* Virtual Digital Marketing Course every week on Monday, Wednesday and
-          Saturday.Virtual Digital... */}
-          {content}
-        </p>
+        {Array.isArray(content) ? (
+          <List content={content} />
+        ) : (
+          <Paragraph content={content} />
+        )}
       </div>
-      <div></div>
     </li>
   );
 };
+
 export default MyNotes;

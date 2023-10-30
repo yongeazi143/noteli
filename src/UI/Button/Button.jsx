@@ -1,6 +1,3 @@
-import { useState } from "react";
-import { useGlobalContext } from "../../../context";
-
 const Button = ({ value, bgColor, onClick }) => {
   return (
     <button

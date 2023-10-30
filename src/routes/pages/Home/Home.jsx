@@ -1,13 +1,13 @@
-import { useState } from "react";
-import MyNotes from "../../../Notes/MyNotes/MyNotes";
+import { useEffect, useState } from "react";
 import images from "../../../constants/images";
 import DateInfo from "../../../containers/DateInfo/DateInfo";
 import TimeOfDay from "../../../containers/TimeOfDay/TimeofDay";
-import templates from "../../../constants/templates";
 import ScratchPad from "../../../Notes/ScratchPad/ScratchPad";
+import TransfomedNotes from "../../../Notes/TransformNotes/TransformedNotes";
 
 const Home = () => {
   const [noteType, setNoteType] = useState(false);
+
   return (
     <section>
       <div
@@ -63,14 +63,7 @@ const Home = () => {
             </li>
           </ul>
           <ul className="flex flex-col items-center justify-center gap-1 py-2 w-full">
-            {templates.map((note, index) => (
-              <MyNotes
-                key={index}
-                tittle={note.title}
-                content={note.content}
-                color={note.color}
-              />
-            ))}
+            <TransfomedNotes />
           </ul>
         </div>
       </div>
