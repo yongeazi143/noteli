@@ -58,45 +58,130 @@ const TransfomedNotes = () => {
       },
     ])
   );
-
   const processContents = (contents) => {
-    if (typeof contents === "object") {
-      let title = "";
-      let content = "";
+    let title = "";
+    let content = [];
 
-      if (contents.content && Array.isArray(contents.content)) {
-        contents.content.forEach((contentItem) => {
-          if (contentItem.type === "heading") {
-            title = extractTextFromContent(contentItem.content);
-          } else if (contentItem.type === "paragraph") {
-            content = extractTextFromContent(contentItem.content);
-          } else if (
-            contentItem.type === "bulletList" ||
-            contentItem.type === "orderedList"
-          ) {
-            content = extractListItemsText(contentItem.content);
-          } else if (contentItem.type === "taskList") {
-            content = extractTaskListText(contentItem.content);
-          }
-        });
+    if (contents && Array.isArray(contents.content)) {
+      for (const item of contents.content) {
+        if (item.type === "heading" && Array.isArray(item.content)) {
+          title = item.content
+            .filter((subItem) => subItem.type === "text")
+            .map((subItem) => subItem.text)
+            .join(" ");
+        } else if (item.type === "paragraph" && Array.isArray(item.content)) {
+          content.push(
+            item.content
+              .filter((subItem) => subItem.type === "text")
+              .map((subItem) => subItem.text)
+              .join(" ")
+          );
+        } else if (
+          (item.type === "bulletList" || item.type === "orderedList") &&
+          Array.isArray(item.content)
+        ) {
+          const listItems = item.content.map((listItem) =>
+            listItem.content
+              .map((subItem) =>
+                subItem.content
+                  .filter((subSubItem) => subSubItem.type === "text")
+                  .map((subSubItem) => subSubItem.text)
+                  .join(" ")
+              )
+              .join("\n")
+          );
+          content = content.concat(listItems);
+        } else if (item.type === "taskList" && Array.isArray(item.content)) {
+          const taskItems = item.content.map((taskItem) => {
+            const checked = taskItem.attrs.checked;
+            const text = taskItem.content[0].content
+              .filter((subItem) => subItem.type === "text")
+              .map((subItem) => subItem.text)
+              .join(" ");
+            content.push(checked ? `- [x] ${text}` : `- [ ] ${text}`);
+          });
+        } else if (item.type === "codeBlock" && Array.isArray(item.content)) {
+          const text = item.content
+            .filter((subItem) => subItem.type === "text")
+            .map((subItem) => subItem.text)
+            .join(" ");
+          content.push(text);
+        } else if (item.type === "images" && Array.isArray(item.content)) {
+          const text = item.content
+            .filter((subItem) => subItem.type === "text")
+            .map((subItem) => subItem.text)
+            .join(" ");
+          content.push(`<img src=${text} alt="images"/>`);
+        }
       }
-
-      return [title, content];
     }
 
-    return ["", ""];
+    return [title.trim(), content];
   };
 
-  const extractTaskListText = (taskList) => {
-    return taskList
-      .filter((item) => item.type === "taskItem")
-      .map((taskItem) => {
-        const checked = taskItem.attrs.checked;
-        const text = extractTextFromContent(taskItem.content[0].content);
-        return checked ? `- [x] ${text}` : `- [ ] ${text}`;
-      })
-      .join("\n");
-  };
+  //   const processContents = (contents) => {
+  //     let title = "";
+  //     let content = "";
+  //     console.log(contents);
+  //     if (
+  //       contents &&
+  //       Array.isArray(contents.content) &&
+  //       contents.content.length > 0
+  //     ) {
+  //       contents.content.forEach((item) => {
+  //         if (
+  //           item.type === "heading" &&
+  //           item.content &&
+  //           item.content.length > 0
+  //         ) {
+  //           title = item.content[0].text || "";
+  //           //  content = item.content[0].text || "";
+  //         } else if (
+  //           item.type === "paragraph" &&
+  //           item.content &&
+  //           item.content.length > 0
+  //         ) {
+  //           content = item.content[0].text || "";
+  //           //  title = item.content[0].text || "";
+  //         } else if (
+  //           (item.type === "bulletList" || item.type === "orderedList") &&
+  //           item.content &&
+  //           item.content.length > 0
+  //         ) {
+  //           const listItems = item.content.map(
+  //             (listItem) => listItem.content[0].text
+  //           );
+  //           content += listItems.join("\n");
+  //           //  title += listItems.join("\n");
+  //         } else if (
+  //           item.type === "taskList" &&
+  //           item.content &&
+  //           item.content.length > 0
+  //         ) {
+  //           const taskItems = item.content.map((taskItem) => {
+  //             const checked = taskItem.attrs.checked;
+  //             const text = taskItem.content[0].content[0].text;
+  //             return checked ? `- [x] ${text}` : ` - [ ] ${text}`;
+  //           });
+  //           //  title += taskItems.join("\n");
+  //           content += taskItems.join("\n");
+  //         }
+  //       });
+  //     }
+
+  //     return [title.trim(), content.trim()];
+  //   };
+
+  //  const extractTaskListText = (taskList) => {
+  //    return taskList
+  //      .filter((item) => item.type === "taskItem")
+  //      .map((taskItem) => {
+  //        const checked = taskItem.attrs.checked;
+  //        const text = extractTextFromContent(taskItem.content[0].content);
+  //        return checked ? `- [x] ${text}` : `- [ ] ${text}`;
+  //      })
+  //      .join("\n");
+  //  };
 
   const extractTextFromContent = (content) => {
     if (content && Array.isArray(content)) {
@@ -109,25 +194,25 @@ const TransfomedNotes = () => {
     return "";
   };
   useEffect(() => {
-    const lastNoteItem = notes[notes.length - 1];
-    if (lastNoteItem) {
+    const notesToAdd = notes.map((note) => {
       const extractedNote = {};
-
-      for (let key in lastNoteItem) {
+      for (let key in note) {
         if (key === "contents") {
-          console.log(lastNoteItem[key]);
-          console.log(processContents(lastNoteItem[key]));
-          extractedNote.title = processContents(lastNoteItem[key])[0];
-          extractedNote.content = processContents(lastNoteItem[key])[1];
+          const [title, content] = processContents(note[key]);
+          extractedNote.title = title;
+          extractedNote.content = content;
         } else {
-          extractedNote[key] = lastNoteItem[key];
+          extractedNote[key] = note[key];
         }
-        console.log(extractedNote);
       }
-      if (!renderedNotes.some((note) => note.id === extractedNote.id)) {
-        setRenderedNotes((prevNotes) => [...prevNotes, extractedNote]);
-      }
-    }
+      return extractedNote;
+    });
+
+    const updatedRenderedNotes = [...renderedNotes, ...notesToAdd];
+    const uniqueRenderedNotes = updatedRenderedNotes.filter(
+      (note, index, self) => index === self.findIndex((n) => n.id === note.id)
+    );
+    setRenderedNotes(uniqueRenderedNotes);
   }, [notes]);
 
   useEffect(() => {
@@ -136,7 +221,7 @@ const TransfomedNotes = () => {
 
   return (
     <>
-      {renderedNotes.map((note) => {
+      {renderedNotes.reverse().map((note) => {
         return (
           <MyNotes
             key={note.id}
