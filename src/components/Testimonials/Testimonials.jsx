@@ -14,12 +14,12 @@ const Testimonials = () => {
             Testimonial
           </p>
         </div>
-        <h1 className="text-dark-blue text-2xl font-medium font-poppins mb-5 text-center lg:text-left">
+        <h1 className="text-dark-blue dark:text-blue text-2xl font-medium font-poppins mb-5 text-center lg:text-left">
           What They Say?
         </h1>
         <p
           className="text-gray text-base tracking-widest leading-normal font-serif font-medium text-center lg:text-left
-        lg:pt-3"
+        lg:pt-3 dark:text-neutral-300"
         >
           Note.li has got more than 100k positive ratings from our users around
           the world. <br />

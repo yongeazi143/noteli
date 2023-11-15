@@ -54,7 +54,7 @@ const Search = () => {
       <input
         type="text"
         name="note"
-        className="hidden md:block border-b text-black text-sm h-9 leading-7 pt-0 pr-3 pl-10  outline-none font-poppins overflow-hidden"
+        className="hidden md:block border-none text-black text-sm h-9 leading-7 pt-0 pr-3 pl-10  outline-none font-poppins overflow-hidden"
         autoComplete="off"
         placeholder="Search note..."
       />

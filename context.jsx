@@ -1,14 +1,11 @@
 import React, { useContext, useState, useReducer, useEffect } from "react";
-import { Hanko } from "@teamhanko/hanko-elements";
-import { v4 as uuid } from "uuid";
+import _Hanko from "./hanko/hanko";
 
-const apiUrl = process.env.HANKO_API_URL;
-const hanko = new Hanko(apiUrl);
+const hanko = _Hanko.hankoInstance();
 const AppContext = React.createContext();
 const session = hanko.session.get();
 const userId = () => session && session.userID;
 const NOTE_KEY = `note__${userId()}`;
-
 export const ContextApp = ({ children }) => {
   const [activeColor, setActiveColor] = useState("#8ac3a3");
   const [activeItem, setActiveItem] = useState("Home");
@@ -17,7 +14,7 @@ export const ContextApp = ({ children }) => {
   const [noteJsonData, setNoteJsonData] = useState(
     JSON.parse(localStorage.getItem(NOTE_KEY))
   );
-
+  const [userIdInStorage, setUserIdInStorage] = useState([]);
   return (
     <AppContext.Provider
       value={{
@@ -33,6 +30,8 @@ export const ContextApp = ({ children }) => {
         noteJsonData,
         setNoteJsonData,
         NOTE_KEY,
+        userIdInStorage,
+        setUserIdInStorage,
       }}
     >
       {children}
