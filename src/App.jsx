@@ -1,29 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Toaster, ToastBar } from "react-hot-toast";
-
 import "./App.css";
 import PageLoader from "./UI/PageLoader/PageLoader";
-import PageRoutes from "./routes/PageRoutes";
+import ThemeButton from "./UI/ThemeButton/ThemeButton";
+
+// const PageLoader = lazy(() => import("./UI/PageLoader/PageLoader"));
+const PageRoutes = lazy(() => import("./routes/PageRoutes"));
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const handleLoad = () => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 10000);
-    };
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 10000);
 
-    if (document.readyState === "complete") {
-      handleLoad();
-    } else {
-      window.addEventListener("load", handleLoad);
-    }
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
-  }, []);
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -48,7 +43,7 @@ const App = () => {
           />
         )}
       </Toaster>
-      {loading ? <PageLoader /> : <PageRoutes />}
+      <Suspense fallback={<PageLoader />}>{<PageRoutes />}</Suspense>
     </>
   );
 };

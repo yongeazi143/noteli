@@ -1,52 +1,65 @@
-// LogoutUser.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Hanko } from "@teamhanko/hanko-elements";
 import UserEmail from "../../../containers/UserEmail/UserEmail";
 import swal from "sweetalert";
+import { supabase } from "../../../../supabase/supabase";
+import toast from "react-hot-toast";
 
 const hankoApi = process.env.HANKO_API_URL;
 
 const LogoutUser = ({ expanded }) => {
   const navigate = useNavigate();
-  const [hanko, setHanko] = useState();
+  const [hanko, setHanko] = useState(null);
   const [firstLetter, setFirstLetter] = useState("");
 
   useEffect(() => {
-    import("@teamhanko/hanko-elements").then(({ Hanko }) =>
-      setHanko(new Hanko(hankoApi ?? ""))
-    );
+    import("@teamhanko/hanko-elements").then(({ Hanko }) => {
+      //? Check if Hanko is available before setting it
+      if (Hanko) {
+        setHanko(new Hanko(hankoApi ?? ""));
+      }
+    });
   }, []);
 
   const onFirstLetterChange = (letter) => {
     setFirstLetter(letter);
   };
 
-  const logout = async () => {
+  const updateUserAuthStateOnLogout = async () => {
     try {
-      // Logout user
-      await hanko?.user.logout();
-
-      // Remove user ID from localStorage
-      localStorage.removeItem("userId");
-
-      // Redirect to login page
-      navigate("/login");
+      const { data, error } = await supabase
+        .from("hanko_authentication_users")
+        .update({ is_login: false })
+        .eq("user_id", "46691ff0-6e20-405e-96cf-a48e14cac3a5")
+        .select();
     } catch (error) {
-      console.error("Error during logout:", error);
+      console.log(error);
     }
   };
+
+  const logout = async () => {
+    try {
+      //todo Logout user /hanko auth/
+      await hanko?.user.logout();
+      //todo Logout user /supabase auth/
+      updateUserAuthStateOnLogout();
+      navigate("/login");
+    } catch (error) {
+      toast.error("Error during logout:", error);
+    }
+  };
+
   const beforeLogout = () => {
     swal({
-      title: "Are you sure?",
-      // text: "Make sure you save all notes,",
+      title: "Confirm Logout",
+      text: "Are you sure you want to log out?",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((willLogout) => {
       if (willLogout) {
         console.log(willLogout);
-        swal("😊! Logging you out", {
+        swal("Logging you out...", {
           icon: "success",
         }).then(() => {
           logout();
@@ -65,9 +78,9 @@ const LogoutUser = ({ expanded }) => {
       </h1>
       <div
         className={`
-              flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-full ml-3" : "w-0"}
-          `}
+          flex justify-between items-center
+          overflow-hidden transition-all ${expanded ? "w-full ml-3" : "w-0"}
+      `}
       >
         <div className="leading-4 font-semibold w-full ">
           <h5 className="flex items-center justify-between ">

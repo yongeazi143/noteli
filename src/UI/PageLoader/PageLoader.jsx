@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef, useEffect } from "react";
 import Icon from "../SVG/Icon";
 import gsap from "gsap";
 import images from "../../constants/images";
+import ThemeButton from "../ThemeButton/ThemeButton";
 
 const PageLoader = () => {
   const pageRef = useRef();
@@ -35,22 +36,25 @@ const PageLoader = () => {
   }, []);
 
   return (
-    <div
-      className="absolute top-0 left-0 flex items-center justify-center h-screen w-full bg-hero z-20"
-      ref={pageRef}
-    >
-      <div className="flex flex-col items-center justify-center gap-8 text-center py-2 px-8">
-        <Icon width={150} height={150} />
-        <div className="content">
-          <h1
-            className="font-poppins font-medium text-3xl leading-normal uppercase tracking-normal text-dark-blue"
-            ref={textRef}
-          >
-            Note.li
-          </h1>
+    <>
+      <ThemeButton invisibe={"invisible"} />
+      <div
+        className="absolute top-0 left-0 flex items-center justify-center h-screen w-full bg-hero z-20 dark:bg-[#252A2F]"
+        ref={pageRef}
+      >
+        <div className="flex flex-col items-center justify-center gap-8 text-center py-2 px-8">
+          <Icon width={150} height={150} />
+          <div className="content">
+            <h1
+              className=" font-medium text-3xl leading-normal tracking-normal text-dark-blue dark:text-accent"
+              ref={textRef}
+            >
+              Noteli
+            </h1>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

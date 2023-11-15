@@ -16,14 +16,17 @@ const Navbar = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Backdrop show={toggleNav} clicked={() => setToggleNav(!toggleNav)} />
-      <nav className="w-full p-2 pt-5 flex items-center justify-between bg-hero fixed z-10 font-poppins">
-        <Logo />
+      <nav className="w-full p-2 pt-5 flex items-center justify-between bg-hero  dark:bg-footer fixed z-10 font-poppins">
+        <div className=" w-[10%]">
+          <Logo />
+        </div>
         <div
-          className={`fixed top-1/4 w-3/4 h-[50vh] flex flex-col items-center p-2 flex-1 justify-center z-20 shadow-lg bg-white rounded-2xl hide ${navState} navbar_links duration-1000 md:w-1/2`}
+          className={`fixed top-1/4 w-3/4 h-[60vh] flex flex-col items-center p-2 flex-1 justify-center z-20 shadow-lg  dark:shadow-neutral-300 bg-white dark:bg-footer
+           rounded-2xl hide ${navState} navbar_links duration-1000`}
         >
-          <ul className="lg:flex mb-5 lg:mb-0 md:mr-auto md:ml-auto">
+          <ul className=" flex flex-col items-center justify-center lg:flex-row mb-5 lg:mb-0 md:mr-auto md:ml-auto">
             <WaterDrop>
               <li className="m-4 text-base font-medium">
                 <NavLink
@@ -31,7 +34,7 @@ const Navbar = () => {
                   to="home"
                   spy={true}
                   activeClass="active"
-                  className="text-nav-blue transition-all ease-in-out duration-150 hover:text-orange cursor-pointer"
+                  className="text-nav-blue dark:text-blue transition-all ease-in-out duration-150 hover:text-orange cursor-pointer"
                   smooth={true}
                   duration={500}
                   offset={-70}
@@ -47,7 +50,7 @@ const Navbar = () => {
                   to="features"
                   spy={true}
                   activeClass="active"
-                  className="text-nav-blue transition-all ease-in-out duration- hover:text-orange cursor-pointer"
+                  className="text-nav-blue dark:text-blue  transition-all ease-in-out duration- hover:text-orange cursor-pointer"
                   smooth={true}
                   duration={500}
                   offset={-100}
@@ -63,7 +66,7 @@ const Navbar = () => {
                   to="about-us"
                   spy={true}
                   activeClass="active"
-                  className="text-nav-blue transition-all ease-in-out duration-150 hover:text-orange cursor-pointer"
+                  className="text-nav-blue dark:text-blue  transition-all ease-in-out duration-150 hover:text-orange cursor-pointer"
                   smooth={true}
                   duration={500}
                   offset={-130}
@@ -79,13 +82,20 @@ const Navbar = () => {
                   to="contact-us"
                   spy={true}
                   activeClass="active"
-                  className="text-nav-blue transition-all ease-in-out duration-150 hover:text-orange cursor-pointer"
+                  className="text-nav-blue dark:text-blue  transition-all ease-in-out duration-150 hover:text-orange cursor-pointer"
                   smooth={true}
                   duration={500}
                   offset={-120}
                 >
                   Contact Us
                 </NavLink>
+              </li>
+            </WaterDrop>
+            <WaterDrop>
+              <li className="m-4 text-base font-medium">
+                <Link className="text-nav-blue dark:text-blue  transition-all ease-in-out duration-150 hover:text-orange cursor-pointer">
+                  👋 Star us on Github 🙏
+                </Link>
               </li>
             </WaterDrop>
           </ul>
@@ -101,18 +111,20 @@ const Navbar = () => {
         </div>
         <WaterDrop>
           <div
-            className="cursor-pointer md:mr-10 lg:hidden"
+            className="cursor-pointer text-white md:mr-10 lg:hidden"
             onClick={() => setToggleNav(!toggleNav)}
           >
             {!toggleNav ? (
               <i className={"bx bx-menu bx-md"}></i>
             ) : (
-              <i className={"bx bx-x bx-md bx-border p-2"}></i>
+              <i
+                className={"bx bx-x bx-md bx-border p-2 dark:border-orange"}
+              ></i>
             )}
           </div>
         </WaterDrop>
       </nav>
-    </React.Fragment>
+    </>
   );
 };
 

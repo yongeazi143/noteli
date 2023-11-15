@@ -11,7 +11,7 @@ hanko-auth::part(container) {
 
 .hankoComponent::part(input) {
   background: #3d3f63;
-  padding: 32px 0px 25px 16px;
+  padding: 32px 0px 25px 10px;
   border-radius: 4px 4px 0px 0px;
   color: #dfd5df;
   font-family: "Nunito Sans", "sans-serif";
@@ -120,5 +120,5 @@ hanko-auth::part(container) {
   font-family: "Unica One", sans-serif;
   padding-right: auto;
   font-weight: 900;
-  font-size: 40px;
+  font-size: 25px;
 }

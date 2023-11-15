@@ -1,13 +1,13 @@
 const ContactUs = () => {
   return (
     <section
-      className="bg-footer flex flex-col items-center justify-start w-full h-auto p-4 text-gray-100 text-center font-normal text-lg font-poppins"
+      className="bg-footer flex flex-col items-center justify-start w-full h-auto p-4 text-gray-100 text-center font-normal text-sm font-poppins"
       id="contact-us"
     >
-      <p className="mb-5">Do you have any questions?</p>
+      <p className="mb-5">Do you have any suggestions?</p>
       <p>
-        We are available 24/7 <br></br> to answer any question you have about
-        Note.li
+        Tell us what you like us to improve <br></br> your feedback will go a
+        long way.
       </p>
 
       <form action="GET" className="w-full mt-4 max-w-xl">

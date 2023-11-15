@@ -2,7 +2,7 @@ import WaterDrop from "../../hoc/Animation/WaterDrop/WaterDrop";
 
 const Logo = () => (
   <WaterDrop>
-    <header className="relative md:ml-10 w-1/4 font-unica">
+    <div className="relative md:ml-10 w-1/4 font-serif">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="40"
@@ -15,10 +15,13 @@ const Logo = () => (
           fill="#65DAFF"
         />
       </svg>
-      <h1 className="absolute left-5 top-1 font-bold text-xl">
-        Note.<span className="text-orange">li</span>
+      <h1
+        className="absolute left-5 top-1 font-bold text-xl text-dark-blue
+      dark:text-white"
+      >
+        Note<span className="text-orange">li</span>
       </h1>
-    </header>
+    </div>
   </WaterDrop>
 );
 export default Logo;

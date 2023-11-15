@@ -5,7 +5,8 @@ import Login from "./auth/Login/Login";
 import UserDashboard from "./auth/UserDashboard/UserDashboard";
 import PenAnimation from "../hoc/Animation/PenAnimation/PenAnimation";
 import { useGlobalContext } from "../../context";
-import Signup from "./auth/Signup/Signup";
+import CompleteSignupVerification from "./auth/CompleteRegistration/CompleteRegistration";
+import ThemeButton from "../UI/ThemeButton/ThemeButton";
 // Imports
 
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -44,25 +45,34 @@ const PageRoutes = () => {
   };
 
   return (
-    <Routes>
-      <Route path="/" element={<Content />} />
-      <Route path="/login" exact element={<Login />} />
-      <Route path="/Signup" exact element={<Signup />} />
-      <Route path="/user/dashboard" element={<UserDashboard />}>
+    <>
+      <ThemeButton />
+      <Routes>
+        <Route path="/" element={<Content />} />
+        <Route path="/login" exact element={<Login />} />
         <Route
-          path={`/user/dashboard/:${activeItem.toLowerCase()}`}
-          element={
-            <Suspense fallback={<PenAnimation />}>{renderSubRoute()}</Suspense>
-          }
+          path="/complete-signup-verification"
+          exact
+          element={<CompleteSignupVerification />}
         />
-        <Route
-          path={"/user/dashboard/:new-note"}
-          element={
-            <Suspense fallback={<PenAnimation />}>{<NewNotes />}</Suspense>
-          }
-        />
-      </Route>
-    </Routes>
+        <Route path="/user/dashboard" element={<UserDashboard />}>
+          <Route
+            path={`/user/dashboard/:${activeItem.toLowerCase()}`}
+            element={
+              <Suspense fallback={<PenAnimation />}>
+                {renderSubRoute()}
+              </Suspense>
+            }
+          />
+          <Route
+            path={"/user/dashboard/:new-note"}
+            element={
+              <Suspense fallback={<PenAnimation />}>{<NewNotes />}</Suspense>
+            }
+          />
+        </Route>
+      </Routes>
+    </>
   );
 };
 

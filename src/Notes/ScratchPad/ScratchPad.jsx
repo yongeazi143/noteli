@@ -1,13 +1,25 @@
 import { useState, useEffect } from "react";
-import useDebounce from "../../containers/debounce/debounce";
+import _Hanko from "../../../hanko/hanko";
+import useDebounce from "../../containers/Debounce/Debounce";
 import storage from "../../containers/storage/storage";
-import { useGlobalContext } from "../../../context";
-import { decryptText, encryptText } from "../../containers/secure/secure";
+import { AES, enc } from "crypto-js";
+const hanko = _Hanko.hankoInstance();
+const encryptionKey = "your-encryption-key";
+
+const encryptText = (text) => {
+  return AES.encrypt(text, encryptionKey).toString();
+};
+
+const decryptText = (encryptedText) => {
+  const bytes = AES.decrypt(encryptedText, encryptionKey);
+  return bytes.toString(enc.Utf8);
+};
 
 const ScratchPad = () => {
-  const { userId } = useGlobalContext();
+  const session = hanko.session.get();
+  const userId = () => session && session.userID;
   const [scratchNote, setScratchNote] = useState(() => {
-    const storedText = storage.get(`scratch__${userId()}`);
+    const storedText = storage.get(userId());
     if (storedText) {
       return decryptText(storedText);
     }
@@ -27,7 +39,7 @@ const ScratchPad = () => {
   };
 
   useEffect(() => {
-    storage.set(`scratch__${userId()}`, encryptText(debouncedTxt));
+    storage.set(userId(), encryptText(debouncedTxt));
   }, [debouncedTxt]);
 
   return (
@@ -48,6 +60,9 @@ const ScratchPad = () => {
         value={scratchNote}
         onChange={handleInputChange}
         placeholder="Write something... Don't be afraid it is save and secure"
+        style={{
+          boxShadow: "none",
+        }}
       ></textarea>
     </div>
   );
