@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import _Hanko from "../../../hanko/hanko";
-import useDebounce from "../../containers/Debounce/Debounce";
+import useDebounce from "../../containers/debounce/debounce";
 import storage from "../../containers/storage/storage";
 import { AES, enc } from "crypto-js";
 const hanko = _Hanko.hankoInstance();
