@@ -138,7 +138,8 @@ hanko-auth::part(container) {
   border: 0;
   outline: none;
   transition: border-color 0.3s ease;
-  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
+  /* box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset; */
+  box-shadow: rgba(255, 253, 253, 0.1) 0px 0px 0px 1px inset;
 }
 
 .hankoComponent::part(input):focus {
