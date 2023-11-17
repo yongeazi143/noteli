@@ -1,32 +1,46 @@
-import React, { useLayoutEffect, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import Icon from "../SVG/Icon";
 import gsap from "gsap";
 import images from "../../constants/images";
 import ThemeButton from "../ThemeButton/ThemeButton";
+
+const preloadImages = (imageArray) => {
+  const promises = [];
+
+  for (const imageSrc of imageArray) {
+    const promise = new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve();
+      };
+      img.src = imageSrc;
+    });
+
+    promises.push(promise);
+  }
+
+  return promises;
+};
 
 const PageLoader = () => {
   const pageRef = useRef();
   const textRef = useRef();
 
   useEffect(() => {
-    // Preload images
-    Object.values(images).forEach((image) => {
-      const img = new Image();
-      img.src = image;
-    });
+    Promise.all(preloadImages(Object.values(images)));
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const pageAnimation = gsap.fromTo(
       pageRef.current,
       { opacity: 1 },
-      { opacity: 0, duration: 1.5, delay: 10 }
+      { opacity: 0, repeat: -1, yoyo: true, duration: 1.5, delay: 10 }
     );
 
     const textAnimation = gsap.fromTo(
       textRef.current,
       { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 2, delay: 2 }
+      { y: 0, opacity: 1, repeat: -1, yoyo: true, duration: 2, delay: 2 }
     );
 
     return () => {

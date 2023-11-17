@@ -111,7 +111,7 @@ const Navbar = () => {
         </div>
         <WaterDrop>
           <div
-            className="cursor-pointer text-white md:mr-10 lg:hidden"
+            className="cursor-pointer text-nav-blue dark:text-white md:mr-10 lg:hidden"
             onClick={() => setToggleNav(!toggleNav)}
           >
             {!toggleNav ? (

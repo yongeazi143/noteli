@@ -1,12 +1,14 @@
-import "./Login.css";
+// import "./Login.css";
 import Logo from "../../../UI/Logo/Logo";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import _Hanko, { HankoApiUrl as apiUrl } from "../../../../hanko/hanko";
 import { supabase } from "../../../../supabase/supabase";
 import { useGlobalContext } from "../../../../context";
+
 const { hankoInstance, en, register } = _Hanko;
 
+en.headlines.loginEmail = "Log in or Sign up";
 en.labels.continue = "Login to your Account";
 en.labels.email = "Enter Email Address";
 
@@ -86,18 +88,11 @@ const Login = () => {
     register(apiUrl, { translations: { en } }).catch((error) => {});
   }, []);
   return (
-    <section className="Login bg-hero w-full flex flex-col items-center justify-center gap-10 h-screen">
-      <div className="w-full p-3 flex items-center justify-between">
+    <section className="w-full flex flex-col items-center justify-start gap-10 h-screen">
+      <div className="w-full pt-5 pl-3">
         <Logo />
-        <Link
-          to="/"
-          className="flex items-center cursor-pointer justify-center gap-1 flex-row-reverse text-nav-blue hover:text-black md:mr-16"
-        >
-          <p className=" font-medium text-sm">Back To Home</p>
-          <i className="bx bx-exit bx-rotate-180"></i>
-        </Link>
       </div>
-      <div className="bg-footer w-[90%] h-[80vh] p-5 rounded-2xl flex items-center justify-center max-w-4xl">
+      <div className="px-5 flex-1">
         <hanko-auth class="hankoComponent" />
       </div>
     </section>
