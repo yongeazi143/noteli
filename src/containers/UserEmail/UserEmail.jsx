@@ -1,13 +1,13 @@
 // UserEmail.jsx
 import React, { useEffect, useState } from "react";
-import { Hanko } from "@teamhanko/hanko-elements";
+import _Hanko from "../../../hanko/hanko";
 import toast from "react-hot-toast";
 
 const apiUrl = process.env.HANKO_API_URL;
 
 const UserEmail = ({ onFirstLetterChange }) => {
   const [userEmail, setUserEmail] = useState("");
-  const hanko = new Hanko(apiUrl);
+  const hanko = _Hanko.hankoInstance();
   const sessionStatus = hanko.session.isValid();
   useEffect(() => {
     const fetchUserEmail = async () => {

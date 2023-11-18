@@ -5,12 +5,15 @@ import { useNavigate, Link } from "react-router-dom";
 import _Hanko, { HankoApiUrl as apiUrl } from "../../../../hanko/hanko";
 import { supabase } from "../../../../supabase/supabase";
 import { useGlobalContext } from "../../../../context";
+import Fingerprint from "../../../hoc/Animation/FingerPrint/FingerPrint";
 
 const { hankoInstance, en, register } = _Hanko;
 
 en.headlines.loginEmail = "Log in or Sign up";
 en.labels.continue = "Login to your Account";
 en.labels.email = "Enter Email Address";
+en.labels.signInPasskey = "Continue with Fingerprint";
+en.headlines.registerAuthenticator = "Save your passkey";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,8 +33,7 @@ const Login = () => {
     if (existingUsers && existingUsers.length > 0) {
       return true;
     }
-    if (error) console.log(error);
-    return false;
+    if (error) return false;
   };
 
   const handleSaveToDatabase = async () => {
@@ -49,7 +51,6 @@ const Login = () => {
             },
           ])
           .select();
-        console.log(data, error);
       }
     } catch (error) {
       console.log(error);
@@ -67,7 +68,6 @@ const Login = () => {
           .update({ is_login: sessionStatus() })
           .eq("user_id", "46691ff0-6e20-405e-96cf-a48e14cac3a5")
           .select();
-        console.log("[Updated!!!]", data);
       }
     } catch (error) {
       console.log(error);
@@ -95,6 +95,7 @@ const Login = () => {
       <div className="px-5 flex-1">
         <hanko-auth class="hankoComponent" />
       </div>
+      <Fingerprint />
     </section>
   );
 };

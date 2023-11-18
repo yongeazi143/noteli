@@ -90,7 +90,7 @@ const ContactUs = () => {
         />
         <button
           type="submit"
-          className={`block w-full rounded-md bg-blue px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#3538a0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+          className={`block w-full rounded-md bg-blue px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#3538a0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2  ${
             isSending ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={isSending}

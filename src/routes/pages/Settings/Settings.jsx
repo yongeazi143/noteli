@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { register } from "@teamhanko/hanko-elements";
-const hankoApi = process.env.HANKO_API_URL;
+import _Hanko from "../../../../hanko/hanko";
+const { register } = _Hanko;
 
 const Settings = () => {
   const navigate = useNavigate();

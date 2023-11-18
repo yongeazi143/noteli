@@ -5,7 +5,7 @@ import swal from "sweetalert";
 import { supabase } from "../../../../supabase/supabase";
 import toast from "react-hot-toast";
 
-const hankoApi = process.env.HANKO_API_URL;
+const hankoApi = import.meta.env.VITE_HANKO_API_URL;
 
 const LogoutUser = ({ expanded }) => {
   const navigate = useNavigate();
@@ -58,7 +58,6 @@ const LogoutUser = ({ expanded }) => {
       dangerMode: true,
     }).then((willLogout) => {
       if (willLogout) {
-        console.log(willLogout);
         swal("Logging you out...", {
           icon: "success",
         }).then(() => {

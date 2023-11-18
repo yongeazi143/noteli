@@ -11,6 +11,7 @@ import VisionGirl from "../assets/vision-girl.png";
 import SmilingWoman from "../assets/smiling-woman.png";
 import HomeImg1 from "../assets/home-bg-1.jpg";
 import Loader1 from "../assets/loader.gif";
+import FingerPrint from "../assets/fingerprint.png";
 
 const images = {
   HeroWoman,
@@ -26,6 +27,7 @@ const images = {
   SmilingWoman,
   HomeImg1,
   Loader1,
+  FingerPrint,
 };
 
 export default images;

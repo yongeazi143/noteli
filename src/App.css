@@ -128,18 +128,14 @@ hanko-auth::part(container) {
 }
 
 .hankoComponent::part(input) {
-  @apply bg-transparent text-nav-blue dark:text-white;
+  @apply bg-transparent text-nav-blue dark:text-white shadow-md shadow-[#0f0f0f1a] dark:shadow-[#fffdfd1a] ring-2 mb-2;
   padding: 32px 0px 25px 10px;
-  border-radius: 4px 4px 0px 0px;
+  border-radius: 4px;
   font-family: "Nunito Sans", "sans-serif";
   display: flex;
-  height: 40px;
-  /* padding-right: 0px; */
   border: 0;
   outline: none;
   transition: border-color 0.3s ease;
-  /* box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset; */
-  box-shadow: rgba(255, 253, 253, 0.1) 0px 0px 0px 1px inset;
 }
 
 .hankoComponent::part(input):focus {
@@ -149,9 +145,10 @@ hanko-auth::part(container) {
 }
 
 .hankoComponent::part(primary-button) {
+  @apply bg-transparent text-nav-blue dark:text-white ring-2;
   padding: 0px 32px;
   height: 57px;
-  border-radius: 4px 4px 0px 0px;
+  border-radius: 4px;
   border: 0;
   color: #252641;
   text-align: center;
@@ -161,16 +158,15 @@ hanko-auth::part(container) {
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0.5px;
-  background: linear-gradient(90deg, #a9a5fd 0%, #ebd75d 101.62%);
   transition: all 0.3s ease;
 }
 
 .hankoComponent::part(primary-button):hover {
+  @apply text-nav-blue dark:text-white;
   background: transparent;
   border: 1px solid transparent;
   border-image: linear-gradient(90deg, #a9a5fd 0%, #ebd75d 101.62%);
   border-image-slice: 1;
-  color: #fff;
 }
 
 .hankoComponent::part(headline1) {
@@ -183,17 +179,16 @@ hanko-auth::part(container) {
 }
 
 .hankoComponent::part(paragraph) {
-  @apply text-nav-blue dark:text-white;
-  text-align: center;
+  @apply text-center text-nav-blue dark:text-white;
 }
 
 /* PassKey Button Style */
 .hankoComponent::part(secondary-button) {
+  @apply text-nav-blue bg-transparent dark:text-white ring-2 ring-sky;
   padding: 0px 32px;
   height: 57px;
   border-radius: 4px 4px 0px 0px;
   border: 0;
-  color: #252641;
   font-family: "Nunito Sans", "sans-serif";
   font-size: 18px;
   font-style: normal;
@@ -201,7 +196,6 @@ hanko-auth::part(container) {
   line-height: 24px;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
-  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
 }
 
 .hankoComponent::part(secondary-button):hover {
@@ -238,7 +232,19 @@ hanko-auth::part(container) {
 
 .hankoComponent::part(passcode-input) {
   font-family: "Unica One", sans-serif;
-  padding-right: auto;
+  padding-right: 10px;
   font-weight: 900;
   font-size: 25px;
+}
+
+.hankoComponent::part(error) {
+  @apply py-4 bg-red bg-opacity-20 border-none pl-3;
+}
+
+.hankoComponent::part(error-text) {
+  @apply text-sm text-nav-blue dark:text-white font-serif font-bold;
+}
+
+.hankoComponent::part(link):disabled {
+  @apply text-[#171717] dark:text-white;
 }
