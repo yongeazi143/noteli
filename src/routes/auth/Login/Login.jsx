@@ -92,10 +92,10 @@ const Login = () => {
       <div className="w-full pt-5 pl-3">
         <Logo />
       </div>
-      <div className="px-5 flex-1">
+      <div className="px-5">
         <hanko-auth class="hankoComponent" />
       </div>
-      <Fingerprint />
+      {/* <Fingerprint /> */}
     </section>
   );
 };

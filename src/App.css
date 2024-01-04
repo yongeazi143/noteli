@@ -129,16 +129,17 @@ hanko-auth::part(container) {
 
 .hankoComponent::part(input) {
   @apply bg-transparent text-nav-blue dark:text-white shadow-md shadow-[#0f0f0f1a] dark:shadow-[#fffdfd1a] ring-2 mb-2;
-  padding: 32px 0px 25px 10px;
-  border-radius: 4px;
+  padding: 25px 0px 25px 10px;
+  border-radius: 5px;
   font-family: "Nunito Sans", "sans-serif";
   display: flex;
   border: 0;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .hankoComponent::part(input):focus {
+  @apply ring-0;
   border: 1px solid transparent;
   border-image: linear-gradient(90deg, #a9a5fd 0%, #ebd75d 101.62%);
   border-image-slice: 1;
@@ -146,8 +147,8 @@ hanko-auth::part(container) {
 
 .hankoComponent::part(primary-button) {
   @apply bg-transparent text-nav-blue dark:text-white ring-2;
-  padding: 0px 32px;
-  height: 57px;
+  /* padding: 0px 25px; */
+  height: 50px;
   border-radius: 4px;
   border: 0;
   color: #252641;
@@ -162,7 +163,7 @@ hanko-auth::part(container) {
 }
 
 .hankoComponent::part(primary-button):hover {
-  @apply text-nav-blue dark:text-white;
+  @apply text-nav-blue dark:text-white ring-0;
   background: transparent;
   border: 1px solid transparent;
   border-image: linear-gradient(90deg, #a9a5fd 0%, #ebd75d 101.62%);
@@ -186,8 +187,8 @@ hanko-auth::part(container) {
 .hankoComponent::part(secondary-button) {
   @apply text-nav-blue bg-transparent dark:text-white ring-2 ring-sky;
   padding: 0px 32px;
-  height: 57px;
-  border-radius: 4px 4px 0px 0px;
+  height: 50px;
+  border-radius: 4px;
   border: 0;
   font-family: "Nunito Sans", "sans-serif";
   font-size: 18px;
@@ -199,7 +200,7 @@ hanko-auth::part(container) {
 }
 
 .hankoComponent::part(secondary-button):hover {
-  /* background: #fff; */
+  @apply ring-0;
   border: 1px solid transparent;
   border-image: linear-gradient(90deg, #a9a5fd 0%, #ebd75d 101.62%);
   border-image-slice: 1;
