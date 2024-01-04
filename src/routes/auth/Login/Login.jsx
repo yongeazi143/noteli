@@ -102,7 +102,7 @@ const Login = () => {
             return;
           }
           try {
-            const response = await fetch("/create-user", {
+            const response = await fetch("/api/create-user", {
               method: "POST",
               body: JSON.stringify(user),
             });
