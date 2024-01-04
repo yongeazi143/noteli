@@ -74,11 +74,46 @@ const Login = () => {
     }
   };
 
+  // useEffect(
+  //   () =>
+  //     hanko.onAuthFlowCompleted(async () => {
+  //       const user = await hanko.user.getCurrent();
+
+  //       const fetchData = async () => {
+  //         if (!user) {
+  //           console.error("No user data");
+  //           return;
+  //         }
+
+  //         redirectAfterLogin();
+  //       };
+  //     }),
+  //   [hanko, redirectAfterLogin]
+  // );
+
   useEffect(
     () =>
-      hanko.onAuthFlowCompleted(() => {
-        handleSaveToDatabase();
-        updateUserAuthStateOnLogIn();
+      hanko.onAuthFlowCompleted(async () => {
+        const user = await hanko.user.getCurrent();
+
+        const fetchData = async () => {
+          if (!user) {
+            console.error("No user data");
+            return;
+          }
+          try {
+            const response = await fetch("/create-user", {
+              method: "POST",
+              body: JSON.stringify(user),
+            });
+
+            if (!response.ok)
+              throw new Error(`HTTP error! status: ${response.status}`);
+          } catch (error) {
+            console.error("Fetch Error: ", error);
+          }
+        };
+        await fetchData();
         redirectAfterLogin();
       }),
     [hanko, redirectAfterLogin]

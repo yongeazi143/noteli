@@ -38,7 +38,7 @@ const Hero = () => {
         <AnimatedTextTwo />
         <WaterDrop>
           <Link
-            to="/signup"
+            to="/login"
             className="text-white hover:text-black transition-all ease-in-out duration-150 text-base font-medium bg-orange px-6 py-3 rounded-full hover:bg-white ring-1 ring-dark-blue dark:ring-transparent"
           >
             Explore
